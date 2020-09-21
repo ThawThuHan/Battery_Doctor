@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "305263670891",
+    "firebase_url": "https://battery-doctor-30453.firebaseio.com",
+    "project_id": "battery-doctor-30453",
+    "storage_bucket": "battery-doctor-30453.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305263670891:android:5f6476910d3f7a896c232e",
+        "android_client_info": {
+          "package_name": "ml.thaw.batterydoctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305263670891-l1kcodr55vmsup4hkeuno6chpq95i63v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFHkJU3lxxu-cX00jL3-aXk_qItAXp5tU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305263670891-l1kcodr55vmsup4hkeuno6chpq95i63v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
