@@ -1,7 +1,5 @@
-import 'package:batterydoctor/pages/batterymodelpage/batterymodel.dart';
 import 'package:batterydoctor/pages/batterymodelpage/buynow.dart';
 import 'package:batterydoctor/pages/batterymodelpage/showbattery_brand.dart';
-import 'package:batterydoctor/pages/batterymodelpage/wetbattery.dart';
 import 'package:batterydoctor/pages/home.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,7 +56,7 @@ class _BatteryHomeState extends State<BatteryHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => BuyNow(orderItems.cartItems)));
+                        builder: (context) => MyCart(orderItems.cartItems)));
               },
               color: Colors.white,
             ),
@@ -146,7 +144,7 @@ class _BatteryHomeState extends State<BatteryHome> {
                 physics: NeverScrollableScrollPhysics(),
                 controller: pageController,
                 children: [
-                  WetBattery(),
+                  showBatteryBrand(context, wetBatteryBrands),
                   showBatteryBrand(context, wetBatteryBrands),
                   showBatteryBrand(context, wetBatteryBrands),
                 ],

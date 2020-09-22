@@ -20,6 +20,7 @@ class BatteryDetail extends StatefulWidget {
 class _BatteryDetailState extends State<BatteryDetail> {
   final DocumentSnapshot doc;
   int count = 1;
+  Item item;
 
   _BatteryDetailState({this.doc});
 
@@ -70,12 +71,24 @@ class _BatteryDetailState extends State<BatteryDetail> {
           builder: (context) => CustomButton(
             label: 'Add To Cart',
             onTap: () {
-              Item item = Item(
+              if (!orderItems.cartItems.contains(item)) {
+                item = Item(
                   model: doc['model'],
                   imgUrl: doc['imgUrl'],
                   price: doc['price'],
-                  qty: count);
-              orderItems.addItem(item: item);
+                  qty: count,
+                );
+                orderItems.addItem(item: item);
+              } else {
+                orderItems.removeItem(item: item);
+                item = Item(
+                  model: doc['model'],
+                  imgUrl: doc['imgUrl'],
+                  price: doc['price'],
+                  qty: count,
+                );
+                orderItems.addItem(item: item);
+              }
               final snackbar = SnackBar(
                 content: Text('Item successfully added to Cart!'),
                 duration: Duration(milliseconds: 1000),
@@ -108,7 +121,7 @@ class _BatteryDetailState extends State<BatteryDetail> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => BuyNow(orderItems.cartItems)));
+                        builder: (context) => MyCart(orderItems.cartItems)));
               },
             ),
           )

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -75,6 +76,27 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BrandWidget extends StatelessWidget {
+  final String imgUrl;
+
+  BrandWidget({this.imgUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 8.0,
+      child: Container(
+        height: 80.0,
+        width: 80.0,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: CachedNetworkImageProvider(imgUrl), fit: BoxFit.fill),
+        ),
       ),
     );
   }

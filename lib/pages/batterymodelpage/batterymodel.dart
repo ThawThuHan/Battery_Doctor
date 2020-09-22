@@ -39,7 +39,7 @@ class _BatteryModelState extends State<BatteryModel> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => BuyNow(orderItems.cartItems)));
+                        builder: (context) => MyCart(orderItems.cartItems)));
               },
             ),
           )

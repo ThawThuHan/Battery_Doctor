@@ -1,5 +1,5 @@
+import 'package:batterydoctor/components/customwidgets.dart';
 import 'package:batterydoctor/pages/batterymodelpage/batterymodel.dart';
-import 'package:batterydoctor/pages/batterymodelpage/wetbattery.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

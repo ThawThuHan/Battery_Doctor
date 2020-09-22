@@ -2,7 +2,7 @@ class Item {
   final String model;
   final String imgUrl;
   final int price;
-  final int qty;
+  int qty;
 
   Item({
     this.model,
@@ -10,6 +10,14 @@ class Item {
     this.price,
     this.qty,
   });
+
+  addqty() {
+    qty++;
+  }
+
+  minusqty() {
+    qty--;
+  }
 }
 
 class OrderItems {

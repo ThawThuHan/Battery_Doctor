@@ -7,16 +7,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BuyNow extends StatefulWidget {
+class MyCart extends StatefulWidget {
   final List<Item> items;
 
-  BuyNow(this.items);
+  MyCart(this.items);
 
   @override
-  _BuyNowState createState() => _BuyNowState();
+  _MyCartState createState() => _MyCartState();
 }
 
-class _BuyNowState extends State<BuyNow> {
+class _MyCartState extends State<MyCart> {
   TextEditingController locationController;
   TextEditingController phoneController;
   TextEditingController userController;
@@ -50,7 +50,6 @@ class _BuyNowState extends State<BuyNow> {
     int total = 0;
     for (Item item in widget.items) {
       total = total + (item.price * item.qty);
-      print("${item.price} x ${item.qty} = $total");
     }
     totalAmount = total;
   }
@@ -117,39 +116,85 @@ class _BuyNowState extends State<BuyNow> {
                   String model = widget.items[index].model;
                   int qty = widget.items[index].qty;
                   return Card(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ListTile(
-                            leading: CachedNetworkImage(
+                    child: Container(
+                      height: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.remove_circle,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                totalAmount = totalAmount - (price * qty);
+                                orderItems.removeItem(
+                                    item: widget.items[index]);
+                              });
+                            },
+                          ),
+                          Container(
+                            child: CachedNetworkImage(
                               imageUrl: imgUrl,
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
                             ),
-                            title: Text('$model'),
-                            subtitle: Text('$price Ks'),
-                            trailing: Text(
-                              'Qty : $qty',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8.0,
+                              horizontal: 8.0,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  model,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text("$price Ks"),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(FontAwesomeIcons.plus),
+                                iconSize: 15.0,
+                                onPressed: () {
+                                  setState(() {
+                                    widget.items[index].addqty();
+                                    getItemsTotalAmount();
+                                  });
+                                },
+                                splashRadius: 15.0,
                               ),
-                            ),
+                              Text(
+                                '$qty',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(FontAwesomeIcons.minus),
+                                iconSize: 15.0,
+                                onPressed: qty <= 1
+                                    ? null
+                                    : () {
+                                        setState(() {
+                                          widget.items[index].minusqty();
+                                          getItemsTotalAmount();
+                                        });
+                                      },
+                                splashRadius: 15.0,
+                              ),
+                            ],
                           ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.clear,
-                            // color: Colors.grey,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              totalAmount = totalAmount - (price * qty);
-                              orderItems.removeItem(item: widget.items[index]);
-                            });
-                          },
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -217,3 +262,40 @@ class _BuyNowState extends State<BuyNow> {
     super.dispose();
   }
 }
+
+// Card(
+// child: Row(
+// children: [
+// Expanded(
+// child: ListTile(
+// leading: CachedNetworkImage(
+// imageUrl: imgUrl,
+// errorWidget: (context, url, error) =>
+// Icon(Icons.error),
+// ),
+// title: Text('$model'),
+// subtitle: Text('$price Ks'),
+// trailing: Text(
+// '$qty',
+// style: TextStyle(
+// fontWeight: FontWeight.w500,
+// fontSize: 18.0,
+// ),
+// ),
+// ),
+// ),
+// IconButton(
+// icon: Icon(
+// Icons.clear,
+// // color: Colors.grey,
+// ),
+// onPressed: () {
+// setState(() {
+// totalAmount = totalAmount - (price * qty);
+// orderItems.removeItem(item: widget.items[index]);
+// });
+// },
+// )
+// ],
+// ),
+// );
