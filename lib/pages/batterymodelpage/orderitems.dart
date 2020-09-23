@@ -1,4 +1,5 @@
 class Item {
+  final String brand;
   final String model;
   final String imgUrl;
   final int price;
@@ -9,6 +10,7 @@ class Item {
     this.imgUrl,
     this.price,
     this.qty,
+    this.brand,
   });
 
   addqty() {

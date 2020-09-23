@@ -1,5 +1,5 @@
 import 'package:batterydoctor/pages/batterymodelpage/battery_detail.dart';
-import 'package:batterydoctor/pages/batterymodelpage/buynow.dart';
+import 'package:batterydoctor/pages/batterymodelpage/my_cart.dart';
 import 'package:batterydoctor/pages/home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

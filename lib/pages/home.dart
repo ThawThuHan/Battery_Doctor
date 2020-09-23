@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'battery_change.dart';
 import 'batterymodelpage/orderitems.dart';
 
+final order = Firestore.instance.collection('Order');
 final wetBatteryBrand = Firestore.instance.collection('WetBatteryBrand');
 final userInfo = Firestore.instance.collection('Users');
 final batteries = Firestore.instance.collection('Batteries');

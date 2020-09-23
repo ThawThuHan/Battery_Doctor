@@ -1,5 +1,5 @@
 import 'package:batterydoctor/components/customwidgets.dart';
-import 'package:batterydoctor/pages/batterymodelpage/buynow.dart';
+import 'package:batterydoctor/pages/batterymodelpage/my_cart.dart';
 import 'package:batterydoctor/pages/batterymodelpage/orderitems.dart';
 import 'package:batterydoctor/pages/home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -69,10 +69,15 @@ class _BatteryDetailState extends State<BatteryDetail> {
         ),
         Builder(
           builder: (context) => CustomButton(
+            colors: [
+              Colors.lightGreenAccent,
+              Theme.of(context).primaryColor,
+            ],
             label: 'Add To Cart',
             onTap: () {
               if (!orderItems.cartItems.contains(item)) {
                 item = Item(
+                  brand: doc['brand'],
                   model: doc['model'],
                   imgUrl: doc['imgUrl'],
                   price: doc['price'],
@@ -82,6 +87,7 @@ class _BatteryDetailState extends State<BatteryDetail> {
               } else {
                 orderItems.removeItem(item: item);
                 item = Item(
+                  brand: doc['brand'],
                   model: doc['model'],
                   imgUrl: doc['imgUrl'],
                   price: doc['price'],
@@ -182,6 +188,8 @@ class _BatteryDetailState extends State<BatteryDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  productDetailText(
+                      label: 'Product Brand', value: '${doc['brand']}'),
                   productDetailText(
                       label: 'Product Model', value: '${doc['model']}'),
                   productDetailText(

@@ -1,4 +1,4 @@
-import 'package:batterydoctor/pages/batterymodelpage/buynow.dart';
+import 'package:batterydoctor/pages/batterymodelpage/my_cart.dart';
 import 'package:batterydoctor/pages/batterymodelpage/showbattery_brand.dart';
 import 'package:batterydoctor/pages/home.dart';
 import 'package:carousel_pro/carousel_pro.dart';
