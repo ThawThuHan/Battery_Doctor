@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:batterydoctor/components/customwidgets.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +30,6 @@ class _OrderConfirmState extends State<OrderConfirm> {
           widget.onTap();
         }
       });
-      print(count);
     });
   }
 
@@ -109,7 +107,7 @@ class _OrderConfirmState extends State<OrderConfirm> {
                             count = 0;
                             _timer.cancel();
                           });
-                          widget.onTap();
+                          // widget.onTap();
                         },
                       ),
                 SizedBox(
@@ -143,5 +141,11 @@ class _OrderConfirmState extends State<OrderConfirm> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 }

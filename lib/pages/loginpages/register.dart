@@ -1,9 +1,8 @@
-import 'package:batterydoctor/authentication/auth_service.dart';
+import 'package:batterydoctor/pages/loginpages/user_info.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-AuthService _authService = AuthService();
-final usersRef = Firestore.instance.collection('Users');
+// AuthService _authService = AuthService();
+// final usersRef = Firestore.instance.collection('Users');
 
 class Register extends StatefulWidget {
   @override
@@ -16,8 +15,8 @@ class _RegisterState extends State<Register> {
   final DateTime timeStamp = DateTime.now();
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
-  TextEditingController _name = TextEditingController();
-  TextEditingController _phNumber = TextEditingController();
+  // TextEditingController _name = TextEditingController();
+  // TextEditingController _phNumber = TextEditingController();
   TextEditingController _rePassword = TextEditingController();
 
   @override
@@ -27,10 +26,18 @@ class _RegisterState extends State<Register> {
       backgroundColor: Theme.of(context).accentColor,
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 25.0),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor,
+          ],
+        )),
         child: Form(
           key: _formKey,
           child: ListView(
-//            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -45,34 +52,48 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: TextFormField(
-                    textCapitalization: TextCapitalization.words,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please fill your name';
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: _name,
-                    decoration: buildInputDecoration('Name')),
+              SizedBox(
+                height: 100.0,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: TextFormField(
-                    keyboardType: TextInputType.phone,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please fill your Phone Number';
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: _phNumber,
-                    decoration: buildInputDecoration('Ph no.')),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+              //   child: TextFormField(
+              //     textCapitalization: TextCapitalization.words,
+              //     validator: (value) {
+              //       if (value.isEmpty) {
+              //         return 'Please fill your name';
+              //       } else {
+              //         return null;
+              //       }
+              //     },
+              //     controller: _name,
+              //     decoration: InputDecoration(
+              //       filled: true,
+              //       hintText: 'Name',
+              //       prefixIcon: Icon(Icons.account_circle),
+              //       border: UnderlineInputBorder(
+              //         borderSide: BorderSide(color: Colors.white),
+              //       ),
+              //       focusedBorder: UnderlineInputBorder(
+              //         borderSide: BorderSide(color: Colors.white),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+              //   child: TextFormField(
+              //       keyboardType: TextInputType.phone,
+              //       validator: (value) {
+              //         if (value.isEmpty) {
+              //           return 'Please fill your Phone Number';
+              //         } else {
+              //           return null;
+              //         }
+              //       },
+              //       controller: _phNumber,
+              //       decoration: buildInputDecoration('Ph no.')),
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextFormField(
@@ -85,7 +106,7 @@ class _RegisterState extends State<Register> {
                     }
                   },
                   controller: _email,
-                  decoration: buildInputDecoration('Email'),
+                  decoration: buildInputDecoration('Email', Icons.email),
                 ),
               ),
               Padding(
@@ -100,7 +121,8 @@ class _RegisterState extends State<Register> {
                   },
                   controller: _password,
                   obscureText: true,
-                  decoration: buildInputDecoration('password'),
+                  decoration:
+                      buildInputDecoration('password', Icons.lock_outline),
                 ),
               ),
               Padding(
@@ -115,7 +137,8 @@ class _RegisterState extends State<Register> {
                   },
                   controller: _rePassword,
                   obscureText: true,
-                  decoration: buildInputDecoration('Re-password'),
+                  decoration:
+                      buildInputDecoration('Re-password', Icons.lock_outline),
                 ),
               ),
               Padding(
@@ -132,7 +155,7 @@ class _RegisterState extends State<Register> {
                     ),
                     child: new Center(
                       child: new Text(
-                        'Register',
+                        'Next',
                         style:
                             new TextStyle(fontSize: 18.0, color: Colors.white),
                       ),
@@ -160,45 +183,49 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  createUserInFireStore(userid) async {
-    final DocumentSnapshot doc = await usersRef.document(userid).get();
-    if (!doc.exists) {
-      usersRef.document(userid).setData({
-        'id': userid,
-        'username': _name.text,
-        'email': _email.text,
-        'password': _password.text,
-        'phone': _phNumber.text,
-        'timestamp': timeStamp,
-      });
-    }
-  }
+  // createUserInFireStore(userid) async {
+  //   final DocumentSnapshot doc = await usersRef.document(userid).get();
+  //   if (!doc.exists) {
+  //     usersRef.document(userid).setData({
+  //       'id': userid,
+  //       'username': _name.text,
+  //       'email': _email.text,
+  //       'password': _password.text,
+  //       'phone': _phNumber.text,
+  //       'timestamp': timeStamp,
+  //     });
+  //   }
+  // }
 
   register() async {
     if (_formKey.currentState.validate()) {
       String email = _email.text;
       String password = _password.text;
-      dynamic user = await _authService.registerWithEmail(email, password);
-      if (user != null) {
-        print(user.uid);
-        createUserInFireStore(user.uid);
-        Navigator.pop(context);
-      } else {
-        setState(() {
-          _isAuth = true;
-        });
-      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FillUserInfo(
+            email: email,
+            password: password,
+          ),
+        ),
+      );
     }
   }
 
-  InputDecoration buildInputDecoration(String hintText) {
+  InputDecoration buildInputDecoration(String hintText, IconData icon) {
     return InputDecoration(
-      hintText: hintText,
-      hintStyle: TextStyle(color: Colors.black),
       filled: true,
-      fillColor: Theme.of(context).primaryColor,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.0),
+      hintText: hintText,
+      prefixIcon: Icon(
+        icon,
+        color: Colors.white,
+      ),
+      border: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
       ),
     );
   }

@@ -38,8 +38,8 @@ class _SignInState extends State<SignIn> {
 
   login() async {
     if (_formKey.currentState.validate()) {
-      String email = _email.text;
-      String password = _password.text;
+      String email = _email.text.trim();
+      String password = _password.text.trim();
       dynamic user = await _authService.signInWithEmail(email, password);
       if (user != null) {
         print(user);
@@ -71,7 +71,7 @@ class _SignInState extends State<SignIn> {
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -177,6 +177,7 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
               ),
+              _isAuth ? authFailed() : Text(''),
               SizedBox(
                 height: 70.0,
               ),
@@ -208,101 +209,3 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
-
-//Scaffold(
-//resizeToAvoidBottomInset: false,
-//backgroundColor: Theme.of(context).accentColor,
-//body: Container(
-//padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 25.0),
-//child: Form(
-//key: _formKey,
-//child: Column(
-//mainAxisAlignment: MainAxisAlignment.center,
-//children: [
-//Center(
-//child: Text(
-//'Battery Doctor',
-//style: TextStyle(
-//color: Colors.white,
-//fontFamily: 'Lobster',
-//fontSize: 40.0,
-//fontStyle: FontStyle.italic,
-//),
-//),
-//),
-//SizedBox(
-//height: 100.0,
-//),
-//TextFormField(
-//validator: (value) {
-//if (!value.contains('@') || !value.contains('.')) {
-//return 'Please fill valid Email';
-//} else {
-//return null;
-//}
-//},
-//controller: _email,
-//decoration: inputDecoration('Email'),
-//),
-//SizedBox(
-//height: 20.0,
-//),
-//TextFormField(
-//validator: (value) {
-//if (value.length < 6) {
-//return 'Please fill at least 6 character';
-//} else {
-//return null;
-//}
-//},
-//controller: _password,
-//obscureText: true,
-//decoration: inputDecoration('Password'),
-//),
-//SizedBox(
-//height: 20.0,
-//),
-//RaisedButton(
-//onPressed: () {
-//login();
-//},
-//color: Theme.of(context).primaryColor,
-//textColor: Colors.white,
-//child: Text('Login'),
-//shape: RoundedRectangleBorder(
-//borderRadius: BorderRadius.circular(20.0),
-//),
-//),
-//SizedBox(
-//height: 50.0,
-//),
-//_isAuth ? authFailed() : SizedBox(),
-//SizedBox(
-//height: 50.0,
-//),
-//InkWell(
-//onTap: () {
-//Navigator.push(context,
-//MaterialPageRoute(builder: (BuildContext context) {
-//return Register();
-//}));
-//},
-//child: new Container(
-//height: 50.0,
-//decoration: new BoxDecoration(
-//border: new Border.all(color: Colors.white, width: 1.0),
-//borderRadius: new BorderRadius.circular(20.0),
-//),
-//child: new Center(
-//child: new Text(
-//'No Account? Register Now!',
-//style: new TextStyle(fontSize: 18.0, color: Colors.white),
-//),
-//),
-//),
-//),
-//],
-//),
-//),
-//),
-//)

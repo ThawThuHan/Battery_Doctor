@@ -126,6 +126,7 @@ class _MyCartState extends State<MyCart> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                        fullscreenDialog: true,
                         builder: (context) => OrderConfirm(
                               onTap: postOrder,
                             )));

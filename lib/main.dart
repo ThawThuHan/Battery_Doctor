@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: Color(0xFF00bfa5),
-          accentColor: Color(0xFF616161),
+          // accentColor: Color(0xFF616161),
+          accentColor: Colors.lightGreen,
           textTheme: TextTheme()),
       home: AuthService().handleAuth(),
     );
